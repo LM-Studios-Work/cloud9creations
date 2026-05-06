@@ -56,26 +56,26 @@ export function Services() {
           </h2>
         </div>
 
-        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
           {services.map((service) => {
             const Icon = service.icon
 
             return (
               <article
                 key={service.title}
-                className="flex flex-col gap-3"
+                className="flex gap-4"
               >
                 <Icon 
-                  className="size-6 text-foreground/60" 
+                  className="size-6 flex-shrink-0 text-foreground/60" 
                   strokeWidth={1.5}
                   aria-hidden="true"
                 />
 
-                <div>
+                <div className="flex flex-col gap-2">
                   <h3 className="font-heading text-xs font-semibold uppercase tracking-[0.22em] text-foreground">
                     {service.title}
                   </h3>
-                  <p className="mt-1 text-xs leading-relaxed text-foreground/70">
+                  <p className="text-xs leading-relaxed text-foreground/70">
                     {service.description}
                   </p>
                 </div>
