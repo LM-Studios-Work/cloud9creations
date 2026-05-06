@@ -1,3 +1,5 @@
+import Image from "next/image"
+
 export function Hero() {
   return (
     <section
@@ -59,7 +61,16 @@ export function Hero() {
         </div>
 
         {/* Right: Hero Image */}
-        <div className="relative hidden md:block">
+        <div className="relative hidden min-h-[560px] md:block">
+          <Image
+            src="/logo (2).png"
+            alt="Cloud Nine Creations balloon styling"
+            fill
+            priority
+            sizes="50vw"
+            className="object-cover"
+          />
+
           {/* "Let's Celebrate" script overlay */}
           <div
             className="absolute right-8 top-12 z-10 text-4xl font-normal lg:text-5xl"
@@ -75,11 +86,6 @@ export function Hero() {
             Celebrate
           </div>
 
-          <img
-            src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/WhatsApp%20Image%202026-04-30%20at%2014.51.11-d3TV77H5C6SXXEG6odlE9ceQf6TZJy.jpeg"
-            alt="Elegant balloon arch arrangement in teal, mauve, gold and sage green colours"
-            className="h-auto w-full object-cover object-top"
-          />
         </div>
       </div>
     </section>

@@ -2,6 +2,7 @@
 
 import { useState } from "react"
 import { Menu, X } from "lucide-react"
+import Image from "next/image"
 import { cn } from "@/lib/utils"
 
 const navLinks = [
@@ -21,8 +22,16 @@ export function Navbar() {
       <div className="flex w-full items-center justify-between px-8 py-4">
         {/* Logo */}
         <a href="#home" className="flex items-center gap-3">
-          <div className="relative flex size-16 items-center justify-center">
-            <svg viewBox="0 0 120 120" className="size-16" aria-label="Cloud Nine Creations logo circle">
+          <div className="relative h-16 w-20 md:h-20 md:w-24">
+            <Image
+              src="/logo (2).png"
+              alt="Cloud Nine Creations"
+              fill
+              sizes="(min-width: 768px) 96px, 80px"
+              className="object-contain"
+              priority
+            />
+            <svg viewBox="0 0 120 120" className="hidden" aria-hidden="true">
               <circle cx="60" cy="60" r="56" fill="none" stroke="currentColor" strokeWidth="1.5" className="text-foreground/40" />
               <path
                 d="M 30 60 Q 60 20 90 60"

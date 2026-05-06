@@ -24,10 +24,17 @@ const greatVibes = Great_Vibes({
 })
 
 export const metadata: Metadata = {
-  title: "Cloud Nine Creations | Elevated Balloon Styling for Every Celebration",
+  title:
+    "Cloud Nine Creations | Elevated Balloon Styling for Every Celebration",
   description:
     "At Cloud Nine Creations, we design elegant balloon décor that transforms your special moments into unforgettable experiences. Based in Johannesburg, South Africa.",
-  keywords: "balloon styling, balloon decor, event styling, kids parties, baby shower, Johannesburg",
+  keywords:
+    "balloon styling, balloon decor, event styling, kids parties, baby shower, Johannesburg",
+  icons: {
+    icon: "/favicon.jpeg",
+    shortcut: "/favicon.jpeg",
+    apple: "/favicon.jpeg",
+  },
 }
 
 export default function RootLayout({
@@ -42,7 +49,7 @@ export default function RootLayout({
         "bg-background antialiased",
         jost.variable,
         cormorant.variable,
-        greatVibes.variable,
+        greatVibes.variable
       )}
     >
       <body>{children}</body>
