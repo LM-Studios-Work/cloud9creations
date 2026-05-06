@@ -56,26 +56,29 @@ export function Services() {
           </h2>
         </div>
 
-        <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
-          {services.map((service) => {
+        <div className="grid grid-cols-1 gap-0 sm:grid-cols-2 lg:grid-cols-4 border-l border-r border-border">
+          {services.map((service, index) => {
             const Icon = service.icon
+            const isLastCol = (index + 1) % 4 === 0
 
             return (
               <article
                 key={service.title}
-                className="flex gap-4"
+                className={`flex flex-col items-center gap-5 px-6 py-10 text-center ${
+                  !isLastCol ? "border-r border-border" : ""
+                } ${index >= 2 ? "" : "border-b border-border lg:border-b-0"}`}
               >
                 <Icon 
-                  className="size-6 flex-shrink-0 text-foreground/60" 
-                  strokeWidth={1.5}
+                  className="size-8 text-foreground" 
+                  strokeWidth={1.3}
                   aria-hidden="true"
                 />
 
-                <div className="flex flex-col gap-2">
-                  <h3 className="font-heading text-xs font-semibold uppercase tracking-[0.22em] text-foreground">
+                <div className="flex flex-col gap-3">
+                  <h3 className="font-heading text-sm font-semibold uppercase tracking-[0.16em] text-foreground">
                     {service.title}
                   </h3>
-                  <p className="text-xs leading-relaxed text-foreground/70">
+                  <p className="text-sm leading-relaxed text-foreground/75">
                     {service.description}
                   </p>
                 </div>
