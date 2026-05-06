@@ -133,7 +133,10 @@ export function Navbar() {
 
       {/* Mobile Nav */}
       {mobileOpen && (
-        <nav className="border-t border-border bg-background px-6 py-4 md:hidden" aria-label="Mobile navigation">
+        <nav
+          className="absolute left-0 right-0 top-full border-t border-border bg-background/95 px-6 py-4 shadow-lg backdrop-blur-sm md:hidden"
+          aria-label="Mobile navigation"
+        >
           <ul className="flex flex-col gap-4">
             {navLinks.map((link) => (
               <li key={link.href}>

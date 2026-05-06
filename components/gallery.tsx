@@ -35,15 +35,18 @@ export function Gallery() {
       className="w-full bg-background"
       aria-label="Photo gallery"
     >
-      <div className="grid w-full grid-cols-2 sm:grid-cols-3 lg:grid-cols-5">
+      <div className="flex w-full snap-x snap-mandatory gap-4 overflow-x-auto px-5 pb-4 sm:grid sm:grid-cols-3 sm:gap-0 sm:overflow-visible sm:px-0 sm:pb-0 lg:grid-cols-5">
         {galleryImages.map((image) => (
-          <div key={image.label} className="group relative overflow-hidden">
+          <div
+            key={image.label}
+            className="group relative min-w-[78vw] snap-start overflow-hidden sm:min-w-0"
+          >
             <Image
               src={image.src}
               alt={image.alt}
               width={420}
               height={360}
-              sizes="(min-width: 1024px) 20vw, (min-width: 640px) 33vw, 50vw"
+              sizes="(min-width: 1024px) 20vw, (min-width: 640px) 33vw, 78vw"
               className="h-56 w-full object-cover transition-transform duration-500 group-hover:scale-105 sm:h-72"
             />
             <div className="absolute inset-0 flex items-end justify-center bg-foreground/0 pb-4 opacity-0 transition-all duration-300 group-hover:bg-foreground/20 group-hover:opacity-100">

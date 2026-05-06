@@ -7,9 +7,22 @@ export function Hero() {
       className="relative w-full overflow-hidden bg-background"
       style={{ backgroundColor: "oklch(0.965 0.012 75)" }}
     >
-      <div className="grid w-full grid-cols-1 gap-0 md:grid-cols-2">
+      <Image
+        src="/homepage/hero.webp"
+        alt=""
+        fill
+        priority
+        sizes="100vw"
+        className="object-cover md:hidden"
+        aria-hidden="true"
+      />
+      <div
+        className="absolute inset-0 bg-background/82 md:hidden"
+        aria-hidden="true"
+      />
+      <div className="relative grid w-full grid-cols-1 gap-0 md:grid-cols-2">
         {/* Left: Text */}
-        <div className="flex flex-col justify-center gap-6 px-8 py-16 md:px-14 md:py-20">
+        <div className="flex min-h-[560px] flex-col justify-center gap-6 px-8 py-16 md:min-h-0 md:px-14 md:py-20">
           <h1 className="font-heading text-4xl leading-tight font-medium tracking-wide text-foreground md:text-5xl lg:text-6xl">
             <span className="block uppercase">ELEVATED BALLOON</span>
             <span className="block uppercase">STYLING FOR EVERY</span>
