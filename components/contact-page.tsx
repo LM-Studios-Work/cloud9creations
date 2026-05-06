@@ -254,35 +254,54 @@ export function ContactPage() {
         </div>
       </section>
 
-      <section className="bg-secondary px-5 py-16 sm:px-8 lg:px-14 lg:py-24">
-        <div className="mx-auto w-full max-w-7xl">
-          <div className="grid gap-12 md:grid-cols-[0.65fr_1.35fr] md:items-start">
-            <div className="space-y-2">
-              <p className="text-xs font-semibold tracking-[0.28em] text-accent uppercase">
-                How it works
-              </p>
-              <h2 className="font-heading text-4xl leading-tight font-medium tracking-wide text-foreground uppercase md:text-5xl">
-                From idea to
-                <br />
-                installation.
-              </h2>
-            </div>
+      <section className="bg-background px-5 py-16 sm:px-8 lg:px-14 lg:py-24">
+        <div className="mx-auto w-full max-w-6xl">
+          <div className="mb-12 space-y-3 text-center">
+            <p className="text-xs font-semibold tracking-[0.28em] text-accent uppercase">
+              How it works
+            </p>
+            <h2 className="font-heading text-4xl leading-tight font-medium tracking-wide text-foreground uppercase md:text-5xl">
+              Your celebration, perfectly
+              <br />
+              orchestrated.
+            </h2>
+          </div>
 
-            <div className="grid gap-5 sm:grid-cols-3">
-              {bookingSteps.map((step, index) => (
-                <article
-                  key={step}
-                  className="flex flex-col gap-4 border border-border bg-background/70 p-6 backdrop-blur-sm transition-all hover:border-accent hover:bg-background"
-                >
-                  <span className="font-heading text-4xl font-light tracking-wide text-accent">
-                    0{index + 1}
-                  </span>
-                  <p className="text-sm leading-relaxed text-foreground/75">
-                    {step}
-                  </p>
+          <div className="grid gap-6 sm:gap-4 lg:grid-cols-3">
+            {bookingSteps.map((step, index) => (
+              <div key={step} className="group relative">
+                <article className="relative h-full overflow-hidden bg-card p-8 transition-all duration-300 ease-out hover:shadow-lg hover:shadow-accent/10 sm:p-6">
+                  <div className="relative z-10 flex flex-col gap-6">
+                    <div className="flex items-start justify-between gap-4">
+                      <div className="flex size-14 shrink-0 items-center justify-center bg-gradient-to-br from-accent/20 to-accent/5 rounded">
+                        <span className="font-heading text-2xl font-semibold text-accent">
+                          {index + 1}
+                        </span>
+                      </div>
+                      {index < bookingSteps.length - 1 && (
+                        <div
+                          className="absolute right-0 top-1/2 hidden h-0.5 w-full -translate-y-1/2 translate-x-full bg-gradient-to-r from-border to-transparent lg:block"
+                          aria-hidden="true"
+                        />
+                      )}
+                    </div>
+                    <p className="text-sm leading-relaxed text-foreground/75">
+                      {step}
+                    </p>
+                  </div>
+                  <div
+                    className="absolute inset-0 bg-gradient-to-br from-accent/0 to-accent/5 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+                    aria-hidden="true"
+                  />
                 </article>
-              ))}
-            </div>
+              </div>
+            ))}
+          </div>
+
+          <div className="mt-12 rounded-lg border border-accent/20 bg-accent/5 p-6 text-center">
+            <p className="text-sm leading-relaxed text-foreground/75">
+              <span className="font-semibold text-foreground">Ready to get started?</span> Reach out via WhatsApp or fill out our contact form above. We&apos;ll respond within 24 hours to discuss your vision.
+            </p>
           </div>
         </div>
       </section>
