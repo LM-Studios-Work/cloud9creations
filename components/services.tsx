@@ -63,7 +63,7 @@ export function Services() {
             return (
               <article
                 key={service.title}
-                className="flex flex-col gap-4 border border-border bg-card p-6"
+                className="flex flex-col gap-4"
               >
                 <div
                   className="flex size-10 items-center justify-center border border-foreground/20 text-foreground"
