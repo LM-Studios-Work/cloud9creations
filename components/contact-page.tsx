@@ -254,31 +254,35 @@ export function ContactPage() {
         </div>
       </section>
 
-      <section className="border-y border-border bg-card px-5 py-12 sm:px-8 lg:px-10">
-        <div className="mx-auto grid w-full max-w-7xl gap-8 md:grid-cols-[0.7fr_1.3fr] md:items-center">
-          <div>
-            <p className="text-xs font-semibold tracking-[0.28em] text-accent uppercase">
-              How it works
-            </p>
-            <h2 className="mt-3 font-heading text-3xl font-medium tracking-wide text-foreground uppercase">
-              From idea to installation.
-            </h2>
-          </div>
+      <section className="bg-secondary px-5 py-16 sm:px-8 lg:px-14 lg:py-24">
+        <div className="mx-auto w-full max-w-7xl">
+          <div className="grid gap-12 md:grid-cols-[0.65fr_1.35fr] md:items-start">
+            <div className="space-y-2">
+              <p className="text-xs font-semibold tracking-[0.28em] text-accent uppercase">
+                How it works
+              </p>
+              <h2 className="font-heading text-4xl leading-tight font-medium tracking-wide text-foreground uppercase md:text-5xl">
+                From idea to
+                <br />
+                installation.
+              </h2>
+            </div>
 
-          <div className="grid gap-4 sm:grid-cols-3">
-            {bookingSteps.map((step, index) => (
-              <article
-                key={step}
-                className="min-h-40 border border-border bg-background p-5"
-              >
-                <span className="font-heading text-3xl text-primary">
-                  0{index + 1}
-                </span>
-                <p className="mt-5 text-sm leading-relaxed text-muted-foreground">
-                  {step}
-                </p>
-              </article>
-            ))}
+            <div className="grid gap-5 sm:grid-cols-3">
+              {bookingSteps.map((step, index) => (
+                <article
+                  key={step}
+                  className="flex flex-col gap-4 border border-border bg-background/70 p-6 backdrop-blur-sm transition-all hover:border-accent hover:bg-background"
+                >
+                  <span className="font-heading text-4xl font-light tracking-wide text-accent">
+                    0{index + 1}
+                  </span>
+                  <p className="text-sm leading-relaxed text-foreground/75">
+                    {step}
+                  </p>
+                </article>
+              ))}
+            </div>
           </div>
         </div>
       </section>
