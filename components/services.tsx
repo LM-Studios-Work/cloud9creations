@@ -5,22 +5,26 @@ const services = [
     title: "KIDS PARTIES",
     description: "Fun, stylish & unique setups tailored to your theme.",
     icon: PartyHatIcon,
+    href: "/services/kids-parties",
   },
   {
     title: "BABY SHOWERS & CELEBRATIONS",
     description: "Elegant decor for a beautiful & memorable celebration.",
     icon: OnesieIcon,
+    href: "/services/baby-showers",
   },
   {
     title: "EVENT STYLING",
     description:
       "From intimate gatherings to special occasions, we've got you covered.",
     icon: CameraIcon,
+    href: "/services/event-styling",
   },
   {
     title: "CUSTOM SETUPS",
     description: "Bespoke designs created just for you and your vision.",
     icon: BalloonClusterIcon,
+    href: "/services/custom-setups",
   },
 ]
 
@@ -64,7 +68,7 @@ export function Services() {
                   {service.description}
                 </p>
                 <Link
-                  href="/contact"
+                  href={service.href}
                   className="mt-auto inline-flex w-fit items-center gap-1.5 pt-3 text-xs font-semibold tracking-[0.12em] text-accent uppercase transition-colors hover:text-primary"
                 >
                   View more

@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import { Menu, X } from "lucide-react"
+import { ChevronDown, Menu, X } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
@@ -11,14 +11,21 @@ import { cn } from "@/lib/utils"
 const navLinks = [
   { label: "HOME", href: "/#home" },
   { label: "ABOUT", href: "/#about" },
-  { label: "SERVICES", href: "/#services" },
+  { label: "SERVICES", href: "/#services", hasDropdown: true },
   { label: "GALLERY", href: "/#gallery" },
-  { label: "PACKAGES", href: "/#packages" },
   { label: "CONTACT", href: "/contact" },
+]
+
+const serviceDropdown = [
+  { label: "Kids Parties", href: "/services/kids-parties" },
+  { label: "Baby Showers & Celebrations", href: "/services/baby-showers" },
+  { label: "Event Styling", href: "/services/event-styling" },
+  { label: "Custom Setups", href: "/services/custom-setups" },
 ]
 
 export function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false)
+  const [servicesOpen, setServicesOpen] = useState(false)
   const pathname = usePathname()
 
   return (
@@ -35,73 +42,6 @@ export function Navbar() {
               className="object-contain"
               priority
             />
-            <svg viewBox="0 0 120 120" className="hidden" aria-hidden="true">
-              <circle
-                cx="60"
-                cy="60"
-                r="56"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="1.5"
-                className="text-foreground/40"
-              />
-              <path
-                d="M 30 60 Q 60 20 90 60"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="1.5"
-                className="text-foreground/40"
-              />
-              <text
-                x="50%"
-                y="44%"
-                textAnchor="middle"
-                dominantBaseline="middle"
-                className="fill-foreground font-heading text-[10px] font-semibold tracking-[0.25em]"
-                style={{ fontFamily: "var(--font-heading)" }}
-                fontSize="10"
-                letterSpacing="3"
-              >
-                CLOUD
-              </text>
-              <text
-                x="50%"
-                y="56%"
-                textAnchor="middle"
-                dominantBaseline="middle"
-                style={{
-                  fontFamily: "var(--font-script)",
-                  fill: "oklch(0.72 0.12 75)",
-                  fontSize: "16px",
-                }}
-              >
-                nine
-              </text>
-              <text
-                x="50%"
-                y="68%"
-                textAnchor="middle"
-                dominantBaseline="middle"
-                style={{ fontFamily: "var(--font-heading)" }}
-                className="fill-foreground"
-                fontSize="8"
-                letterSpacing="2"
-              >
-                CREATIONS
-              </text>
-              <text
-                x="50%"
-                y="79%"
-                textAnchor="middle"
-                dominantBaseline="middle"
-                style={{ fontFamily: "var(--font-sans)" }}
-                className="fill-foreground/60"
-                fontSize="5"
-                letterSpacing="1.5"
-              >
-                BALLOONS • PARTIES • MEMORIES
-              </text>
-            </svg>
           </div>
         </Link>
 
@@ -110,9 +50,76 @@ export function Navbar() {
           className="hidden items-center gap-8 md:flex"
           aria-label="Main navigation"
         >
-          {navLinks.map((link) => (
-            <NavLink key={link.href} link={link} pathname={pathname} />
-          ))}
+          {navLinks.map((link) =>
+            link.hasDropdown ? (
+              <div
+                key={link.href}
+                className="relative"
+                onMouseEnter={() => setServicesOpen(true)}
+                onMouseLeave={() => setServicesOpen(false)}
+              >
+                <button
+                  className={cn(
+                    "flex items-center gap-1 text-xs font-medium tracking-widest text-foreground/70 transition-colors hover:text-foreground",
+                    (pathname.startsWith("/services") || pathname === "/") &&
+                      pathname !== "/contact" &&
+                      "text-foreground"
+                  )}
+                  style={{
+                    color: pathname.startsWith("/services")
+                      ? "oklch(0.72 0.12 75)"
+                      : undefined,
+                  }}
+                  aria-haspopup="true"
+                  aria-expanded={servicesOpen}
+                >
+                  {link.label}
+                  <ChevronDown
+                    className={cn(
+                      "size-3 transition-transform",
+                      servicesOpen && "rotate-180"
+                    )}
+                    aria-hidden="true"
+                  />
+                </button>
+
+                {/* Dropdown */}
+                {servicesOpen && (
+                  <div className="absolute top-full left-1/2 z-50 mt-2 w-56 -translate-x-1/2 border border-border bg-background shadow-lg">
+                    <div className="py-1">
+                      <Link
+                        href="/#services"
+                        className="block px-4 py-2.5 text-[11px] font-semibold tracking-[0.18em] text-muted-foreground uppercase transition-colors hover:text-foreground"
+                      >
+                        All Services
+                      </Link>
+                      <div className="my-1 border-t border-border" />
+                      {serviceDropdown.map((item) => (
+                        <Link
+                          key={item.href}
+                          href={item.href}
+                          className={cn(
+                            "block px-4 py-2.5 text-sm text-foreground/75 transition-colors hover:bg-muted hover:text-foreground",
+                            pathname === item.href && "font-medium text-foreground"
+                          )}
+                          style={{
+                            color:
+                              pathname === item.href
+                                ? "oklch(0.72 0.12 75)"
+                                : undefined,
+                          }}
+                        >
+                          {item.label}
+                        </Link>
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </div>
+            ) : (
+              <NavLink key={link.href} link={link} pathname={pathname} />
+            )
+          )}
         </nav>
 
         {/* CTA */}
@@ -146,27 +153,69 @@ export function Navbar() {
           className="absolute top-full right-0 left-0 border-t border-border bg-background/95 px-6 py-4 shadow-lg backdrop-blur-sm md:hidden"
           aria-label="Mobile navigation"
         >
-          <ul className="flex flex-col gap-4">
+          <ul className="flex flex-col gap-1">
             {navLinks.map((link) => (
               <li key={link.href}>
-                <Link
-                  href={link.href}
-                  className={cn(
-                    "text-sm font-medium tracking-widest text-foreground/70 transition-colors hover:text-foreground",
-                    isActiveLink(link, pathname) && "text-foreground"
-                  )}
-                  style={{
-                    color: isActiveLink(link, pathname)
-                      ? "oklch(0.72 0.12 75)"
-                      : undefined,
-                  }}
-                  onClick={() => setMobileOpen(false)}
-                >
-                  {link.label}
-                </Link>
+                {link.hasDropdown ? (
+                  <div>
+                    <Link
+                      href={link.href}
+                      className={cn(
+                        "block py-3 text-sm font-medium tracking-widest text-foreground/70 transition-colors hover:text-foreground",
+                        pathname.startsWith("/services") && "text-foreground"
+                      )}
+                      style={{
+                        color: pathname.startsWith("/services")
+                          ? "oklch(0.72 0.12 75)"
+                          : undefined,
+                      }}
+                      onClick={() => setMobileOpen(false)}
+                    >
+                      {link.label}
+                    </Link>
+                    <ul className="mb-2 ml-4 flex flex-col gap-1 border-l border-border pl-4">
+                      {serviceDropdown.map((item) => (
+                        <li key={item.href}>
+                          <Link
+                            href={item.href}
+                            className={cn(
+                              "block py-1.5 text-sm text-foreground/65 transition-colors hover:text-foreground",
+                              pathname === item.href && "font-medium"
+                            )}
+                            style={{
+                              color:
+                                pathname === item.href
+                                  ? "oklch(0.72 0.12 75)"
+                                  : undefined,
+                            }}
+                            onClick={() => setMobileOpen(false)}
+                          >
+                            {item.label}
+                          </Link>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                ) : (
+                  <Link
+                    href={link.href}
+                    className={cn(
+                      "block py-3 text-sm font-medium tracking-widest text-foreground/70 transition-colors hover:text-foreground",
+                      isActiveLink(link, pathname) && "text-foreground"
+                    )}
+                    style={{
+                      color: isActiveLink(link, pathname)
+                        ? "oklch(0.72 0.12 75)"
+                        : undefined,
+                    }}
+                    onClick={() => setMobileOpen(false)}
+                  >
+                    {link.label}
+                  </Link>
+                )}
               </li>
             ))}
-            <li>
+            <li className="pt-2">
               <a
                 href="https://wa.me/27821234567"
                 target="_blank"
@@ -212,6 +261,5 @@ function isActiveLink(link: (typeof navLinks)[number], pathname: string) {
   if (pathname === "/contact") {
     return link.href === "/contact"
   }
-
   return pathname === "/" && link.href === "/#home"
 }

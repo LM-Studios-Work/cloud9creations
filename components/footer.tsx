@@ -16,11 +16,11 @@ const pageLinks = [
 ]
 
 const serviceLinks = [
-  { label: "Kids parties", href: "/contact" },
-  { label: "Baby showers", href: "/contact" },
-  { label: "Birthday celebrations", href: "/contact" },
-  { label: "Milestone events", href: "/contact" },
-  { label: "Custom balloon setups", href: "/contact" },
+  { label: "Kids Parties", href: "/services/kids-parties" },
+  { label: "Baby Showers & Celebrations", href: "/services/baby-showers" },
+  { label: "Event Styling", href: "/services/event-styling" },
+  { label: "Custom Setups", href: "/services/custom-setups" },
+  { label: "Contact us", href: "/contact" },
 ]
 
 const contactLinks = [
