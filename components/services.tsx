@@ -63,20 +63,19 @@ export function Services() {
             return (
               <article
                 key={service.title}
-                className="flex flex-col gap-4"
+                className="flex flex-col gap-3"
               >
-                <div
-                  className="flex size-10 items-center justify-center border border-foreground/20 text-foreground"
+                <Icon 
+                  className="size-6 text-foreground/60" 
+                  strokeWidth={1.5}
                   aria-hidden="true"
-                >
-                  <Icon className="size-5" strokeWidth={1.5} />
-                </div>
+                />
 
                 <div>
-                  <h3 className="font-heading text-sm font-semibold uppercase tracking-[0.22em] text-foreground">
+                  <h3 className="font-heading text-xs font-semibold uppercase tracking-[0.22em] text-foreground">
                     {service.title}
                   </h3>
-                  <p className="mt-2 text-sm leading-relaxed text-foreground/70">
+                  <p className="mt-1 text-xs leading-relaxed text-foreground/70">
                     {service.description}
                   </p>
                 </div>
