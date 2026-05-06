@@ -1,3 +1,5 @@
+import Link from "next/link"
+
 const services = [
   {
     title: "KIDS PARTIES",
@@ -31,7 +33,7 @@ export function Services() {
     >
       <div className="mx-auto w-full max-w-7xl">
         <div className="mb-8 text-center">
-          <h2 className="font-heading text-2xl font-medium uppercase tracking-[0.12em] text-foreground md:text-3xl">
+          <h2 className="font-heading text-2xl font-medium tracking-[0.12em] text-foreground uppercase md:text-3xl">
             OUR SERVICES
           </h2>
           <div
@@ -55,19 +57,19 @@ export function Services() {
                 <service.icon />
               </div>
               <div className="flex flex-col">
-                <h3 className="font-heading text-sm font-semibold uppercase leading-snug tracking-[0.11em] text-foreground">
+                <h3 className="font-heading text-sm leading-snug font-semibold tracking-[0.11em] text-foreground uppercase">
                   {service.title}
                 </h3>
                 <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
                   {service.description}
                 </p>
-                <a
-                  href="#contact"
-                  className="mt-auto inline-flex w-fit items-center gap-1.5 pt-3 text-xs font-semibold uppercase tracking-[0.12em] text-accent transition-colors hover:text-primary"
+                <Link
+                  href="/contact"
+                  className="mt-auto inline-flex w-fit items-center gap-1.5 pt-3 text-xs font-semibold tracking-[0.12em] text-accent uppercase transition-colors hover:text-primary"
                 >
                   View more
                   <span aria-hidden="true">-&gt;</span>
-                </a>
+                </Link>
               </div>
             </article>
           ))}

@@ -2,6 +2,7 @@ import type { Metadata } from "next"
 import { Cormorant_Garamond, Great_Vibes, Jost } from "next/font/google"
 
 import "./globals.css"
+import { FloatingWhatsAppButton } from "@/components/floating-whatsapp-button"
 import { cn } from "@/lib/utils"
 
 const jost = Jost({
@@ -52,7 +53,10 @@ export default function RootLayout({
         greatVibes.variable
       )}
     >
-      <body>{children}</body>
+      <body>
+        {children}
+        <FloatingWhatsAppButton />
+      </body>
     </html>
   )
 }
