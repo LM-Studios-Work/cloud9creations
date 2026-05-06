@@ -13,7 +13,6 @@ const navLinks = [
   { label: "ABOUT", href: "/#about" },
   { label: "SERVICES", href: "/#services" },
   { label: "GALLERY", href: "/#gallery" },
-  { label: "PACKAGES", href: "/#packages" },
   { label: "CONTACT", href: "/contact" },
 ]
 
@@ -35,73 +34,6 @@ export function Navbar() {
               className="object-contain"
               priority
             />
-            <svg viewBox="0 0 120 120" className="hidden" aria-hidden="true">
-              <circle
-                cx="60"
-                cy="60"
-                r="56"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="1.5"
-                className="text-foreground/40"
-              />
-              <path
-                d="M 30 60 Q 60 20 90 60"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="1.5"
-                className="text-foreground/40"
-              />
-              <text
-                x="50%"
-                y="44%"
-                textAnchor="middle"
-                dominantBaseline="middle"
-                className="fill-foreground font-heading text-[10px] font-semibold tracking-[0.25em]"
-                style={{ fontFamily: "var(--font-heading)" }}
-                fontSize="10"
-                letterSpacing="3"
-              >
-                CLOUD
-              </text>
-              <text
-                x="50%"
-                y="56%"
-                textAnchor="middle"
-                dominantBaseline="middle"
-                style={{
-                  fontFamily: "var(--font-script)",
-                  fill: "oklch(0.72 0.12 75)",
-                  fontSize: "16px",
-                }}
-              >
-                nine
-              </text>
-              <text
-                x="50%"
-                y="68%"
-                textAnchor="middle"
-                dominantBaseline="middle"
-                style={{ fontFamily: "var(--font-heading)" }}
-                className="fill-foreground"
-                fontSize="8"
-                letterSpacing="2"
-              >
-                CREATIONS
-              </text>
-              <text
-                x="50%"
-                y="79%"
-                textAnchor="middle"
-                dominantBaseline="middle"
-                style={{ fontFamily: "var(--font-sans)" }}
-                className="fill-foreground/60"
-                fontSize="5"
-                letterSpacing="1.5"
-              >
-                BALLOONS • PARTIES • MEMORIES
-              </text>
-            </svg>
           </div>
         </Link>
 
@@ -146,13 +78,13 @@ export function Navbar() {
           className="absolute top-full right-0 left-0 border-t border-border bg-background/95 px-6 py-4 shadow-lg backdrop-blur-sm md:hidden"
           aria-label="Mobile navigation"
         >
-          <ul className="flex flex-col gap-4">
+          <ul className="flex flex-col gap-1">
             {navLinks.map((link) => (
               <li key={link.href}>
                 <Link
                   href={link.href}
                   className={cn(
-                    "text-sm font-medium tracking-widest text-foreground/70 transition-colors hover:text-foreground",
+                    "block py-3 text-sm font-medium tracking-widest text-foreground/70 transition-colors hover:text-foreground",
                     isActiveLink(link, pathname) && "text-foreground"
                   )}
                   style={{
@@ -166,7 +98,7 @@ export function Navbar() {
                 </Link>
               </li>
             ))}
-            <li>
+            <li className="pt-2">
               <a
                 href="https://wa.me/27821234567"
                 target="_blank"
@@ -212,6 +144,5 @@ function isActiveLink(link: (typeof navLinks)[number], pathname: string) {
   if (pathname === "/contact") {
     return link.href === "/contact"
   }
-
   return pathname === "/" && link.href === "/#home"
 }
