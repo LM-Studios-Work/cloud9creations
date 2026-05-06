@@ -1,6 +1,5 @@
 import type { LucideIcon } from "lucide-react"
 import {
-  ArrowRight,
   Baby,
   Balloon,
   CakeSlice,
@@ -59,40 +58,30 @@ export function Services() {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
           {services.map((service) => {
             const Icon = service.icon
 
             return (
-              <article key={service.title} className="flex flex-col gap-5">
-                <div
-                  className="flex size-16 items-center justify-center rounded-full text-white"
-                  style={{ backgroundColor: "oklch(0.56 0.11 150)" }}
+              <article key={service.title} className="flex gap-4">
+                <Icon 
+                  className="size-6 flex-shrink-0 text-foreground/60" 
+                  strokeWidth={1.3}
                   aria-hidden="true"
-                >
-                  <Icon className="size-7" strokeWidth={1.5} />
-                </div>
+                />
 
-                <div>
-                  <h3 className="font-heading text-sm font-semibold uppercase tracking-[0.18em] text-foreground">
+                <div className="flex flex-col gap-2">
+                  <h3 className="font-heading text-xs font-semibold uppercase tracking-[0.20em] text-foreground">
                     {service.title}
                   </h3>
-                  <p className="mt-2 text-sm leading-relaxed text-foreground/70">
+                  <p className="text-xs leading-relaxed text-foreground/70">
                     {service.description}
                   </p>
                 </div>
-
-                <a
-                  href="#contact"
-                  className="inline-flex w-fit items-center gap-2 pt-2 text-xs font-semibold uppercase tracking-[0.18em] transition-colors"
-                  style={{ color: "oklch(0.72 0.12 75)" }}
-                >
-                  View More
-                  <ArrowRight className="size-4" strokeWidth={1.8} aria-hidden="true" />
-                </a>
               </article>
             )
           })}
+        </div>
         </div>
 
         <div className="mt-10 border-t border-border pt-10">
