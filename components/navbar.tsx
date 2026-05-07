@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import { Menu, X } from "lucide-react"
+import { ChevronDown, Menu, X } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
@@ -9,29 +9,54 @@ import { WhatsAppIcon } from "@/components/social-icons"
 import { cn } from "@/lib/utils"
 
 const navLinks = [
-  { label: "HOME", href: "/#home" },
+  { label: "HOME", href: "/" },
   { label: "ABOUT", href: "/#about" },
-  { label: "SERVICES", href: "/#services" },
-  { label: "GALLERY", href: "/#gallery" },
+  { label: "GALLERY", href: "/gallery" },
   { label: "CONTACT", href: "/contact" },
 ]
 
-export function Navbar() {
+const serviceLinks = [
+  { label: "Kids Parties", href: "/services/kids-parties" },
+  { label: "Baby Showers & Celebrations", href: "/services/baby-showers" },
+  { label: "Event Styling", href: "/services/event-styling" },
+  { label: "Custom Setups", href: "/services/custom-setups" },
+]
+
+export function Navbar({ mobileOverlay = false }: { mobileOverlay?: boolean }) {
   const [mobileOpen, setMobileOpen] = useState(false)
   const pathname = usePathname()
 
   return (
-    <header className="sticky top-0 right-0 left-0 z-50 border-b border-border bg-background/95 backdrop-blur-sm">
-      <div className="flex w-full items-center justify-between px-8 py-4">
+    <header
+      className={cn(
+        "top-0 right-0 left-0 z-50 border-b",
+        mobileOverlay
+          ? "absolute border-transparent bg-transparent md:sticky md:border-border md:bg-background/95 md:backdrop-blur-sm"
+          : "sticky border-border bg-background/95 backdrop-blur-sm"
+      )}
+    >
+      <div
+        className={cn(
+          "flex w-full items-center justify-between px-8 md:py-4",
+          mobileOverlay ? "pt-5 pb-3" : "py-4"
+        )}
+      >
         {/* Logo */}
-        <Link href="/#home" className="flex items-center gap-3">
-          <div className="relative h-16 w-20 md:h-20 md:w-24">
+        <Link href="/" className="flex items-center gap-3">
+          <div
+            className={cn(
+              "relative md:h-20 md:w-24 md:overflow-visible md:rounded-none md:bg-transparent md:shadow-none md:ring-0",
+              mobileOverlay
+                ? "h-20 w-20 overflow-hidden rounded-full bg-card shadow-[0_3px_14px_rgb(0_0_0_/_0.16)] ring-1 ring-border/70"
+                : "h-16 w-20"
+            )}
+          >
             <Image
               src="/logo (2).png"
               alt="Cloud Nine Creations"
               fill
               sizes="(min-width: 768px) 96px, 80px"
-              className="object-contain"
+              className={cn("object-contain md:p-0", mobileOverlay && "p-1")}
               priority
             />
           </div>
@@ -42,9 +67,11 @@ export function Navbar() {
           className="hidden items-center gap-8 md:flex"
           aria-label="Main navigation"
         >
-          {navLinks.map((link) => (
-            <NavLink key={link.href} link={link} pathname={pathname} />
-          ))}
+          <NavLink link={navLinks[0]} pathname={pathname} />
+          <NavLink link={navLinks[1]} pathname={pathname} />
+          <ServicesDropdown pathname={pathname} />
+          <NavLink link={navLinks[2]} pathname={pathname} />
+          <NavLink link={navLinks[3]} pathname={pathname} />
         </nav>
 
         {/* CTA */}
@@ -63,41 +90,82 @@ export function Navbar() {
 
         {/* Mobile menu button */}
         <button
-          className="flex items-center justify-center rounded-md p-2 text-foreground md:hidden"
+          className={cn(
+            "flex items-center justify-center rounded-md text-foreground/70 md:hidden",
+            mobileOverlay ? "p-1.5" : "p-2"
+          )}
           onClick={() => setMobileOpen(!mobileOpen)}
           aria-label={mobileOpen ? "Close menu" : "Open menu"}
           aria-expanded={mobileOpen}
         >
-          {mobileOpen ? <X className="size-5" /> : <Menu className="size-5" />}
+          {mobileOpen ? (
+            <X className={mobileOverlay ? "size-8" : "size-5"} />
+          ) : (
+            <Menu className={mobileOverlay ? "size-8" : "size-5"} />
+          )}
         </button>
       </div>
 
       {/* Mobile Nav */}
       {mobileOpen && (
         <nav
-          className="absolute top-full right-0 left-0 border-t border-border bg-background/95 px-6 py-4 shadow-lg backdrop-blur-sm md:hidden"
+          className="absolute top-full right-0 left-0 border-t border-border bg-background px-6 py-4 shadow-lg md:hidden"
           aria-label="Mobile navigation"
         >
           <ul className="flex flex-col gap-1">
-            {navLinks.map((link) => (
-              <li key={link.href}>
-                <Link
-                  href={link.href}
-                  className={cn(
-                    "block py-3 text-sm font-medium tracking-widest text-foreground/70 transition-colors hover:text-foreground",
-                    isActiveLink(link, pathname) && "text-foreground"
-                  )}
-                  style={{
-                    color: isActiveLink(link, pathname)
-                      ? "oklch(0.72 0.12 75)"
-                      : undefined,
-                  }}
-                  onClick={() => setMobileOpen(false)}
-                >
-                  {link.label}
-                </Link>
-              </li>
-            ))}
+            <MobileLink
+              link={navLinks[0]}
+              pathname={pathname}
+              onClick={() => setMobileOpen(false)}
+            />
+            <MobileLink
+              link={navLinks[1]}
+              pathname={pathname}
+              onClick={() => setMobileOpen(false)}
+            />
+            <li>
+              <Link
+                href="/#services"
+                className={cn(
+                  "block py-3 text-sm font-medium tracking-widest text-foreground/70 transition-colors hover:text-foreground",
+                  isServicesActive(pathname) && "text-foreground"
+                )}
+                style={{
+                  color: isServicesActive(pathname)
+                    ? "oklch(0.72 0.12 75)"
+                    : undefined,
+                }}
+                onClick={(event) => {
+                  handleHashClick("/#services")(event)
+                  setMobileOpen(false)
+                }}
+              >
+                SERVICES
+              </Link>
+              <ul className="border-l border-border pl-4">
+                {serviceLinks.map((link) => (
+                  <li key={link.href}>
+                    <Link
+                      href={link.href}
+                      className="block py-2 text-xs font-medium tracking-widest text-foreground/60 transition-colors hover:text-foreground"
+                      onClick={() => setMobileOpen(false)}
+                    >
+                      {link.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </li>
+            <MobileLink
+              link={navLinks[2]}
+              pathname={pathname}
+              onClick={() => setMobileOpen(false)}
+            />
+            <MobileLink
+              link={navLinks[3]}
+              pathname={pathname}
+              onClick={() => setMobileOpen(false)}
+            />
             <li className="pt-2">
               <a
                 href="https://wa.me/27821234567"
@@ -117,6 +185,51 @@ export function Navbar() {
   )
 }
 
+function ServicesDropdown({ pathname }: { pathname: string }) {
+  const active = isServicesActive(pathname)
+
+  return (
+    <div className="group relative">
+      <Link
+        href="/#services"
+        onClick={handleHashClick("/#services")}
+        className={cn(
+          "flex items-center gap-1 text-xs font-medium tracking-widest text-foreground/70 transition-colors hover:text-foreground",
+          active && "border-b border-gold pb-0.5 text-foreground"
+        )}
+        style={{ color: active ? "oklch(0.72 0.12 75)" : undefined }}
+        aria-haspopup="true"
+      >
+        SERVICES
+        <ChevronDown
+          className="size-3.5 transition-transform group-hover:rotate-180"
+          aria-hidden="true"
+        />
+      </Link>
+      <div className="invisible absolute top-full left-1/2 w-64 -translate-x-1/2 pt-4 opacity-0 transition-all duration-150 group-focus-within:visible group-focus-within:opacity-100 group-hover:visible group-hover:opacity-100">
+        <div className="border border-border bg-background p-2 shadow-lg">
+          <Link
+            href="/#services"
+            onClick={handleHashClick("/#services")}
+            className="block px-4 py-2.5 text-xs font-medium tracking-widest text-foreground/65 uppercase transition-colors hover:bg-secondary hover:text-foreground"
+          >
+            All Services
+          </Link>
+          {serviceLinks.map((link) => (
+            <Link
+              key={link.href}
+              href={link.href}
+              className="block px-4 py-2.5 text-xs font-medium tracking-widest text-foreground/65 uppercase transition-colors hover:bg-secondary hover:text-foreground"
+            >
+              {link.label}
+            </Link>
+          ))}
+        </div>
+      </div>
+    </div>
+  )
+}
+
 function NavLink({
   link,
   pathname,
@@ -129,6 +242,7 @@ function NavLink({
   return (
     <Link
       href={link.href}
+      onClick={handleHashClick(link.href)}
       className={cn(
         "text-xs font-medium tracking-widest text-foreground/70 transition-colors hover:text-foreground",
         active && "border-b border-gold pb-0.5 text-foreground"
@@ -140,9 +254,79 @@ function NavLink({
   )
 }
 
+function MobileLink({
+  link,
+  pathname,
+  onClick,
+}: {
+  link: (typeof navLinks)[number]
+  pathname: string
+  onClick: () => void
+}) {
+  const active = isActiveLink(link, pathname)
+
+  return (
+    <li>
+      <Link
+        href={link.href}
+        onClick={(event) => {
+          handleHashClick(link.href)(event)
+          onClick()
+        }}
+        className={cn(
+          "block py-3 text-sm font-medium tracking-widest text-foreground/70 transition-colors hover:text-foreground",
+          active && "text-foreground"
+        )}
+        style={{
+          color: active ? "oklch(0.72 0.12 75)" : undefined,
+        }}
+      >
+        {link.label}
+      </Link>
+    </li>
+  )
+}
+
 function isActiveLink(link: (typeof navLinks)[number], pathname: string) {
-  if (pathname === "/contact") {
-    return link.href === "/contact"
+  if (link.href === "/") {
+    return pathname === "/"
   }
-  return pathname === "/" && link.href === "/#home"
+
+  if (link.href.startsWith("/#")) {
+    return false
+  }
+
+  return pathname === link.href || pathname.startsWith(`${link.href}/`)
+}
+
+function isServicesActive(pathname: string) {
+  return pathname.startsWith("/services")
+}
+
+function handleHashClick(href: string) {
+  return (event: React.MouseEvent<HTMLAnchorElement>) => {
+    if (!href.startsWith("/#") || window.location.pathname !== "/") {
+      return
+    }
+
+    const target = document.getElementById(href.slice(2))
+
+    if (!target) {
+      return
+    }
+
+    event.preventDefault()
+    window.history.pushState(null, "", href)
+
+    const headerHeight =
+      document.querySelector("header")?.getBoundingClientRect().height ?? 0
+
+    window.scrollTo({
+      top: Math.max(
+        target.getBoundingClientRect().top + window.scrollY - headerHeight,
+        0
+      ),
+      behavior: "smooth",
+    })
+  }
 }

@@ -61,12 +61,15 @@ export function ServicePage({
         />
         <div className="absolute inset-0 bg-foreground/55" aria-hidden="true" />
 
-        <div className="relative flex min-h-[580px] w-full flex-col justify-end px-5 pb-14 pt-24 sm:px-8 lg:px-14 lg:pb-20">
+        <div className="relative flex min-h-[580px] w-full flex-col justify-end px-5 pt-24 pb-14 sm:px-8 lg:px-14 lg:pb-20">
           {/* Breadcrumb */}
           <nav aria-label="Breadcrumb" className="mb-6">
-            <ol className="flex items-center gap-2 text-[11px] font-semibold tracking-[0.22em] uppercase text-primary-foreground/60">
+            <ol className="flex items-center gap-2 text-[11px] font-semibold tracking-[0.22em] text-primary-foreground/60 uppercase">
               <li>
-                <Link href="/#services" className="transition-colors hover:text-primary-foreground">
+                <Link
+                  href="/#services"
+                  className="transition-colors hover:text-primary-foreground"
+                >
                   Services
                 </Link>
               </li>
@@ -76,7 +79,7 @@ export function ServicePage({
           </nav>
 
           <div className="max-w-3xl">
-            <h1 className="font-heading text-5xl font-medium leading-none tracking-wide text-primary-foreground uppercase sm:text-6xl lg:text-7xl">
+            <h1 className="font-heading text-5xl leading-none font-medium tracking-wide text-primary-foreground uppercase sm:text-6xl lg:text-7xl">
               {headline}
               <span
                 className="mt-3 block text-6xl font-normal normal-case sm:text-7xl lg:text-8xl"
@@ -103,8 +106,8 @@ export function ServicePage({
                 <WhatsAppIcon className="size-4" />
               </a>
               <Link
-                href="/#gallery"
-                className="inline-flex items-center gap-2 text-xs font-semibold tracking-widest text-primary-foreground/80 uppercase transition-colors hover:text-primary-foreground"
+                href="/gallery"
+                className="inline-flex items-center gap-2 border border-primary-foreground/55 px-6 py-3 text-xs font-semibold tracking-widest text-primary-foreground uppercase transition-colors hover:border-primary-foreground hover:bg-primary-foreground/10"
               >
                 VIEW GALLERY
                 <ArrowRight className="size-4" aria-hidden="true" />
@@ -127,7 +130,10 @@ export function ServicePage({
             <h2 className="mt-3 font-heading text-3xl font-medium tracking-[0.1em] text-foreground uppercase sm:text-4xl">
               {tag}
             </h2>
-            <div className="mx-auto mt-2 h-px w-12 bg-accent" aria-hidden="true" />
+            <div
+              className="mx-auto mt-2 h-px w-12 bg-accent"
+              aria-hidden="true"
+            />
           </div>
 
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
@@ -256,7 +262,10 @@ export function ServicePage({
                 className="group flex items-center justify-between border border-border bg-card px-5 py-4 text-sm font-semibold tracking-wide text-foreground transition-colors hover:border-primary hover:text-primary"
               >
                 <span>{svc.label}</span>
-                <ArrowRight className="size-4 opacity-40 transition-opacity group-hover:opacity-100" aria-hidden="true" />
+                <ArrowRight
+                  className="size-4 opacity-40 transition-opacity group-hover:opacity-100"
+                  aria-hidden="true"
+                />
               </Link>
             ))}
           </div>

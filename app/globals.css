@@ -46,6 +46,8 @@
 }
 
 :root {
+    --navbar-height: 97px;
+
     /* Warm cream background */
     --background: oklch(0.965 0.012 75);
     --foreground: oklch(0.22 0.01 60);
@@ -102,5 +104,17 @@
   }
   html {
     @apply font-sans;
+    scroll-behavior: smooth;
+    scroll-padding-top: var(--navbar-height);
+  }
+
+  [id] {
+    scroll-margin-top: var(--navbar-height);
+  }
+}
+
+@media (min-width: 768px) {
+  :root {
+    --navbar-height: 113px;
   }
 }

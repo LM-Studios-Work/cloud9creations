@@ -24,15 +24,15 @@ const features = [
 export function FeaturesBar() {
   return (
     <section
-      className="border-y border-border bg-card px-5 py-8 sm:px-8 lg:px-10"
+      className="border-y border-border bg-card px-5 py-5 sm:px-8 md:py-8 lg:px-10"
       aria-label="Our features"
     >
       <div className="mx-auto w-full max-w-7xl">
-        <div className="grid gap-y-8 sm:grid-cols-2 lg:grid-cols-4 lg:gap-y-0">
+        <div className="grid grid-cols-2 gap-x-5 gap-y-5 lg:grid-cols-4 lg:gap-y-0">
           {features.map((feature, index) => (
             <article
               key={feature.title}
-              className="flex items-center gap-5 lg:border-r lg:border-border/90 lg:px-10 first:lg:pl-0 last:lg:border-r-0 last:lg:pr-0"
+              className="flex items-start gap-3 lg:items-center lg:gap-5 lg:border-r lg:border-border/90 lg:px-10 first:lg:pl-0 last:lg:border-r-0 last:lg:pr-0"
             >
               <div
                 className="shrink-0 text-primary"
@@ -41,10 +41,10 @@ export function FeaturesBar() {
                 <feature.icon />
               </div>
               <div>
-                <h3 className="font-heading text-xs font-semibold uppercase tracking-[0.16em] text-foreground">
+                <h3 className="font-heading text-[0.7rem] leading-tight font-semibold tracking-[0.08em] text-foreground uppercase md:text-xs md:tracking-[0.16em]">
                   {feature.title}
                 </h3>
-                <p className="mt-2 max-w-[14rem] text-sm leading-relaxed text-muted-foreground">
+                <p className="mt-1.5 max-w-[9rem] text-[0.72rem] leading-snug text-muted-foreground md:mt-2 md:max-w-[14rem] md:text-sm md:leading-relaxed">
                   {feature.description}
                 </p>
               </div>
@@ -63,7 +63,7 @@ function HeartIcon() {
   return (
     <svg
       viewBox="0 0 48 48"
-      className="size-12"
+      className="size-8 md:size-12"
       fill="none"
       stroke="currentColor"
       strokeWidth="1.7"
@@ -79,7 +79,7 @@ function LeafIcon() {
   return (
     <svg
       viewBox="0 0 48 48"
-      className="size-12"
+      className="size-8 md:size-12"
       fill="none"
       stroke="currentColor"
       strokeWidth="1.7"
@@ -99,7 +99,7 @@ function BalloonIcon() {
   return (
     <svg
       viewBox="0 0 48 48"
-      className="size-12"
+      className="size-8 md:size-12"
       fill="none"
       stroke="currentColor"
       strokeWidth="1.7"
@@ -120,7 +120,7 @@ function SparkleIcon() {
   return (
     <svg
       viewBox="0 0 48 48"
-      className="size-12"
+      className="size-8 md:size-12"
       fill="none"
       stroke="currentColor"
       strokeWidth="1.7"

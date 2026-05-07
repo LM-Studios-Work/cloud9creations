@@ -8,10 +8,10 @@ import { useState } from "react"
 import { InstagramIcon, WhatsAppIcon } from "@/components/social-icons"
 
 const pageLinks = [
-  { label: "Home", href: "/#home" },
+  { label: "Home", href: "/" },
   { label: "About", href: "/#about" },
   { label: "Services", href: "/#services" },
-  { label: "Gallery", href: "/#gallery" },
+  { label: "Gallery", href: "/gallery" },
   { label: "Contact", href: "/contact" },
 ]
 
@@ -70,7 +70,7 @@ export function Footer() {
         <div className="grid gap-8 lg:grid-cols-[1.22fr_1.55fr_1fr_1.12fr] lg:items-start lg:gap-9">
           <section className="order-1 mx-auto flex max-w-sm flex-col items-center text-center lg:mx-0 lg:items-start lg:text-left">
             <Link
-              href="/#home"
+              href="/"
               className="relative block h-20 w-60 max-w-full sm:h-24 sm:w-72"
               aria-label="Cloud Nine Creations home"
             >
