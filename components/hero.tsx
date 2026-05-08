@@ -4,7 +4,7 @@ export function Hero() {
   return (
     <section
       id="home"
-      className="relative w-full overflow-hidden bg-background"
+      className="relative w-full overflow-visible bg-background md:overflow-hidden"
       style={{ backgroundColor: "oklch(0.965 0.012 75)" }}
     >
       <div className="relative h-[356px] w-full md:hidden">

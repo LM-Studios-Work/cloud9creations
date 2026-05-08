@@ -22,41 +22,22 @@ const serviceLinks = [
   { label: "Custom Setups", href: "/services/custom-setups" },
 ]
 
-export function Navbar({ mobileOverlay = false }: { mobileOverlay?: boolean }) {
+export function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false)
   const pathname = usePathname()
 
   return (
-    <header
-      className={cn(
-        "top-0 right-0 left-0 z-50 border-b",
-        mobileOverlay
-          ? "absolute border-transparent bg-transparent md:sticky md:border-border md:bg-background/95 md:backdrop-blur-sm"
-          : "sticky border-border bg-background/95 backdrop-blur-sm"
-      )}
-    >
-      <div
-        className={cn(
-          "flex w-full items-center justify-between px-8 md:py-4",
-          mobileOverlay ? "pt-5 pb-3" : "py-4"
-        )}
-      >
+    <header className="sticky top-0 right-0 left-0 z-50 overflow-visible border-b border-border bg-background shadow-sm md:bg-background/95 md:backdrop-blur-sm">
+      <div className="relative flex h-20 w-full items-center justify-between px-6 md:h-auto md:px-8 md:py-4">
         {/* Logo */}
-        <Link href="/" className="flex items-center gap-3">
-          <div
-            className={cn(
-              "relative md:h-20 md:w-24 md:overflow-visible md:rounded-none md:bg-transparent md:shadow-none md:ring-0",
-              mobileOverlay
-                ? "h-20 w-20 overflow-hidden rounded-full bg-card shadow-[0_3px_14px_rgb(0_0_0_/_0.16)] ring-1 ring-border/70"
-                : "h-16 w-20"
-            )}
-          >
+        <Link href="/" className="absolute top-2 left-5 z-10 flex items-center gap-3 md:static">
+          <div className="relative h-24 w-24 rounded-full bg-background shadow-[0_8px_22px_rgb(66_49_34_/_0.06)] md:h-20 md:w-24 md:rounded-none md:bg-transparent md:shadow-none">
             <Image
               src="/logo (2).png"
               alt="Cloud Nine Creations"
               fill
               sizes="(min-width: 768px) 96px, 80px"
-              className={cn("object-contain md:p-0", mobileOverlay && "p-1")}
+              className="object-contain"
               priority
             />
           </div>
@@ -90,18 +71,15 @@ export function Navbar({ mobileOverlay = false }: { mobileOverlay?: boolean }) {
 
         {/* Mobile menu button */}
         <button
-          className={cn(
-            "flex items-center justify-center rounded-md text-foreground/70 md:hidden",
-            mobileOverlay ? "p-1.5" : "p-2"
-          )}
+          className="absolute top-1/2 right-5 z-20 flex size-12 -translate-y-1/2 items-center justify-center md:hidden"
           onClick={() => setMobileOpen(!mobileOpen)}
           aria-label={mobileOpen ? "Close menu" : "Open menu"}
           aria-expanded={mobileOpen}
         >
           {mobileOpen ? (
-            <X className={mobileOverlay ? "size-8" : "size-5"} />
+            <X size={34} strokeWidth={2.1} color="#7d6a50" />
           ) : (
-            <Menu className={mobileOverlay ? "size-8" : "size-5"} />
+            <Menu size={34} strokeWidth={2.1} color="#7d6a50" />
           )}
         </button>
       </div>

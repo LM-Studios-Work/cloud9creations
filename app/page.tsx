@@ -57,7 +57,7 @@ export default function Page() {
           __html: JSON.stringify(localBusinessSchema).replace(/</g, "\\u003c"),
         }}
       />
-      <Navbar mobileOverlay />
+      <Navbar />
       <Hero />
       <FeaturesBar />
       <About />
